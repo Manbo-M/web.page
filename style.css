@@ -210,23 +210,30 @@ img {
   font-size: 1rem;
 }
 
+/* TOP中央：黒い背景をなくして画像だけ表示 */
 .hero-art {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
+  height: auto;
+  aspect-ratio: auto;
+  overflow: visible;
   background: transparent;
-  border-radius: 4px;
+  border: none;
+  border-radius: 0;
 }
 
 .hero-main-image {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-width: 100%;
   object-fit: contain;
   object-position: center;
   padding: 0;
-  transition: none;
+  margin: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .hero-art:hover .hero-main-image {
