@@ -1217,3 +1217,94 @@ img {
     }
   }
 }
+
+/* =========================================
+   USER PROVIDED IMAGES
+   ========================================= */
+
+/* Header logo */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  display: block;
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Hero main visual */
+.hero-art {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #171717;
+  border-radius: 3px;
+  transform: none;
+}
+
+.hero-main-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Footer logo */
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-logo img {
+  display: block;
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Remove old decorative elements */
+.hero-art-top,
+.hero-art-bottom,
+.hero-sun,
+.hero-circle,
+.hero-stripe,
+.hero-art-title,
+.hero-star,
+.hero-small-note {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .hero-art {
+    width: 100%;
+  }
+
+  .logo img {
+    width: 130px;
+  }
+
+  .footer-logo img {
+    width: 145px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-art {
+    aspect-ratio: 3 / 2;
+  }
+
+  .logo img {
+    width: 115px;
+  }
+
+  .footer-logo img {
+    width: 130px;
+  }
+}
