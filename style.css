@@ -491,6 +491,8 @@ img {
 }
 
 .about-sticker {
+  opacity: 10;
+
   position: absolute;
   right: 20px;
   top: 25px;
