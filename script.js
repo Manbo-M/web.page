@@ -5,14 +5,15 @@
 /*
   INFORMATION SETTINGS
 
-  NEWS / MEMBER / MUSIC / LIVE / GALLERY
+  NEWS / MEMBERS / MUSIC / LIVE / GALLERY
   の情報は基本的にここから変更できます。
 
-  以下はすべて仮の情報です。
+  以下は制作確認用の仮情報です。
   公開前に実際の情報へ差し替えてください。
 */
 
-// 1. News
+
+// 1. NEWS
 const newsList = [
   {
     date: "2026.11.05",
@@ -28,7 +29,8 @@ const newsList = [
   }
 ];
 
-// 2. Members
+
+// 2. MEMBERS
 const members = [
   {
     name: "Member 01",
@@ -56,7 +58,8 @@ const members = [
   }
 ];
 
-// 3. Music
+
+// 3. MUSIC
 const music = {
   title: "サウダージ",
   category: "DEBUT SONG",
@@ -65,19 +68,23 @@ const music = {
   demo: true
 };
 
-// 4. Live
+
+// 4. LIVE
 const liveList = [
-  // ライブ情報を追加するときは以下の形式で記述
-  //
-  // {
-  //   date: "2026.12.20",
-  //   title: "LIVE TITLE",
-  //   venue: "会場名",
-  //   status: "UPCOMING"
-  // }
+  /*
+  ライブ情報を追加するときは以下の形式で記述してください。
+
+  {
+    date: "2026.12.20",
+    title: "LIVE TITLE",
+    venue: "会場名",
+    status: "UPCOMING"
+  }
+  */
 ];
 
-// 5. Gallery
+
+// 5. GALLERY
 const galleryList = [
   {
     title: "LITTLE MOMENT 01",
@@ -111,71 +118,155 @@ const galleryList = [
   }
 ];
 
-// 6. SNS Settings
+
+// 6. SOCIAL LINKS
 const socialLinks = {
   instagram: ""
 };
 
 
 /* =========================================
-   RENDER FUNCTIONS
+   UTILITY
    ========================================= */
 
-// News
+// HTMLとして解釈させず、安全な文字列に変換
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    };
+
+    return entities[character];
+  });
+}
+
+
+// 要素が存在するときだけHTMLを変更
+function setHTML(selector, html) {
+  const element = document.querySelector(selector);
+
+  if (!element) {
+    console.warn(`little cider: 要素が見つかりません: ${selector}`);
+    return null;
+  }
+
+  element.innerHTML = html;
+  return element;
+}
+
+
+/* =========================================
+   NEWS
+   ========================================= */
+
 function renderNews() {
   const container = document.getElementById("news-list");
 
+  if (!container) return;
+
   if (!newsList.length) {
-    container.innerHTML =
-      '<p class="empty-message">NEW INFORMATION COMING SOON.</p>';
+    container.innerHTML = `
+      <p class="empty-message">
+        NEW INFORMATION COMING SOON.
+      </p>
+    `;
     return;
   }
 
   container.innerHTML = newsList.map(item => `
     <article class="news-item">
-      <time class="news-date">${escapeHTML(item.date)}</time>
-      <span class="news-category">${escapeHTML(item.category)}</span>
-      <p class="news-title">${escapeHTML(item.title)}</p>
-    </article>
-  `).join("");
-}
+      <time class="news-date">
+        ${escapeHTML(item.date)}
+      </time>
 
+      <span class="news-category">
+        ${escapeHTML(item.category)}
+      </span>
 
-// Members
-function renderMembers() {
-  const container = document.getElementById("member-grid");
-
-  if (!members.length) {
-    container.innerHTML =
-      '<p class="empty-message">MEMBERS COMING SOON.</p>';
-    return;
-  }
-
-  container.innerHTML = members.map((member, index) => `
-    <article class="member-card">
-      <div class="member-art">
-        <span class="member-index">MEMBER 0${index + 1}</span>
-        <span class="member-symbol">${escapeHTML(member.symbol)}</span>
-      </div>
-      <h3 class="member-name">${escapeHTML(member.name)}</h3>
-      <p class="member-role">${escapeHTML(member.role)}</p>
-      <p class="member-description">
-        ${escapeHTML(member.description)}
+      <p class="news-title">
+        ${escapeHTML(item.title)}
       </p>
     </article>
   `).join("");
 }
 
 
-// Music
+/* =========================================
+   MEMBERS
+   ========================================= */
+
+function renderMembers() {
+  const container = document.getElementById("member-grid");
+
+  if (!container) return;
+
+  if (!members.length) {
+    container.innerHTML = `
+      <p class="empty-message">
+        MEMBERS COMING SOON.
+      </p>
+    `;
+    return;
+  }
+
+  container.innerHTML = members.map((member, index) => `
+    <article class="member-card">
+
+      <div class="member-art">
+        <span class="member-index">
+          MEMBER ${String(index + 1).padStart(2, "0")}
+        </span>
+
+        <span class="member-symbol">
+          ${escapeHTML(member.symbol)}
+        </span>
+      </div>
+
+      <h3 class="member-name">
+        ${escapeHTML(member.name)}
+      </h3>
+
+      <p class="member-role">
+        ${escapeHTML(member.role)}
+      </p>
+
+      <p class="member-description">
+        ${escapeHTML(member.description)}
+      </p>
+
+    </article>
+  `).join("");
+}
+
+
+/* =========================================
+   MUSIC
+   ========================================= */
+
 function renderMusic() {
   const container = document.getElementById("music-feature");
+
+  if (!container) return;
+
+  if (!music || !music.title) {
+    container.innerHTML = `
+      <p class="empty-message">
+        MUSIC INFORMATION COMING SOON.
+      </p>
+    `;
+    return;
+  }
 
   container.innerHTML = `
     <div class="music-art">
       <span class="music-art-title">
         ${escapeHTML(music.title)}
       </span>
+
       <span class="music-art-label">
         LITTLE CIDER. / MUSIC
       </span>
@@ -185,11 +276,15 @@ function renderMusic() {
       <p class="section-kicker">
         ${escapeHTML(music.category)}
       </p>
+
       <h3>${escapeHTML(music.title)}</h3>
+
       <p>${escapeHTML(music.description)}</p>
+
       <div class="music-meta">
         ${escapeHTML(music.release)}
       </div>
+
       <p class="demo-note">
         ※楽曲の配信先や作品情報は、確認後に追加してください。
       </p>
@@ -198,9 +293,14 @@ function renderMusic() {
 }
 
 
-// Live
+/* =========================================
+   LIVE
+   ========================================= */
+
 function renderLive() {
   const container = document.getElementById("live-list");
+
+  if (!container) return;
 
   if (!liveList.length) {
     container.innerHTML = `
@@ -213,7 +313,10 @@ function renderLive() {
 
   container.innerHTML = liveList.map(item => `
     <article class="live-item">
-      <time class="live-date">${escapeHTML(item.date)}</time>
+
+      <time class="live-date">
+        ${escapeHTML(item.date)}
+      </time>
 
       <div class="live-info">
         <h3>${escapeHTML(item.title)}</h3>
@@ -223,14 +326,29 @@ function renderLive() {
       <span class="live-status">
         ${escapeHTML(item.status || "INFO")}
       </span>
+
     </article>
   `).join("");
 }
 
 
-// Gallery
+/* =========================================
+   GALLERY
+   ========================================= */
+
 function renderGallery() {
   const container = document.getElementById("gallery-grid");
+
+  if (!container) return;
+
+  if (!galleryList.length) {
+    container.innerHTML = `
+      <p class="empty-message">
+        GALLERY COMING SOON.
+      </p>
+    `;
+    return;
+  }
 
   container.innerHTML = galleryList.map((item, index) => `
     <button
@@ -239,7 +357,9 @@ function renderGallery() {
       data-gallery-index="${index}"
       aria-label="${escapeHTML(item.title)}を表示"
     >
-      <span class="gallery-art">${escapeHTML(item.symbol)}</span>
+      <span class="gallery-art">
+        ${escapeHTML(item.symbol)}
+      </span>
     </button>
   `).join("");
 }
@@ -253,26 +373,45 @@ function setupGalleryModal() {
   const modal = document.getElementById("gallery-modal");
   const modalArt = document.getElementById("modal-art");
   const modalCaption = document.getElementById("modal-caption");
-  const closeButton = modal.querySelector(".modal-close");
+  const closeButton = modal?.querySelector(".modal-close");
+  const gallery = document.getElementById("gallery-grid");
 
-  function openModal(item) {
+  if (!modal || !modalArt || !modalCaption || !closeButton || !gallery) {
+    return;
+  }
+
+  let previousFocus = null;
+
+  function openModal(item, trigger) {
+    if (!item) return;
+
+    previousFocus = trigger;
+
     modalArt.textContent = item.symbol;
     modalCaption.textContent = item.title;
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
+
     document.body.classList.add("modal-open");
 
     closeButton.focus();
   }
 
   function closeModal() {
+    if (!modal.classList.contains("is-open")) return;
+
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
+
     document.body.classList.remove("modal-open");
+
+    if (previousFocus && document.contains(previousFocus)) {
+      previousFocus.focus();
+    }
   }
 
-  document.getElementById("gallery-grid").addEventListener("click", event => {
+  gallery.addEventListener("click", event => {
     const button = event.target.closest("[data-gallery-index]");
 
     if (!button) return;
@@ -280,7 +419,7 @@ function setupGalleryModal() {
     const index = Number(button.dataset.galleryIndex);
     const item = galleryList[index];
 
-    if (item) openModal(item);
+    openModal(item, button);
   });
 
   closeButton.addEventListener("click", closeModal);
@@ -292,7 +431,10 @@ function setupGalleryModal() {
   });
 
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && modal.classList.contains("is-open")) {
+    if (
+      event.key === "Escape" &&
+      modal.classList.contains("is-open")
+    ) {
       closeModal();
     }
   });
@@ -306,11 +448,15 @@ function setupGalleryModal() {
 function setupNavigation() {
   const toggle = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".global-nav");
+
+  if (!toggle || !nav) return;
+
   const navLinks = nav.querySelectorAll("a");
 
   function closeNavigation() {
     toggle.classList.remove("is-active");
     nav.classList.remove("is-open");
+
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "メニューを開く");
   }
@@ -319,6 +465,7 @@ function setupNavigation() {
     const isOpen = nav.classList.toggle("is-open");
 
     toggle.classList.toggle("is-active", isOpen);
+
     toggle.setAttribute("aria-expanded", String(isOpen));
     toggle.setAttribute(
       "aria-label",
@@ -328,6 +475,12 @@ function setupNavigation() {
 
   navLinks.forEach(link => {
     link.addEventListener("click", closeNavigation);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closeNavigation();
+    }
   });
 
   window.addEventListener("resize", () => {
@@ -344,38 +497,33 @@ function setupNavigation() {
 
 function setupInstagram() {
   const link = document.getElementById("instagram-link");
+  const note = document.getElementById("instagram-note");
 
-  if (socialLinks.instagram.trim()) {
-    link.href = socialLinks.instagram;
+  if (!link) return;
+
+  const instagramURL = socialLinks.instagram.trim();
+
+  if (instagramURL) {
+    link.href = instagramURL;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
+
+    if (note) {
+      note.hidden = true;
+    }
   } else {
-    link.href = "#contact";
+    link.href = "#";
+    link.setAttribute("aria-disabled", "true");
+
     link.addEventListener("click", event => {
       event.preventDefault();
-      alert("InstagramのURLがまだ設定されていません。");
     });
+
+    if (note) {
+      note.hidden = false;
+      note.textContent = "※InstagramのURLは準備中です。";
+    }
   }
-}
-
-
-/* =========================================
-   SECURITY / UTILITY
-   ========================================= */
-
-// HTMLとして解釈させず、文字列として表示する
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, character => {
-    const entities = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    };
-
-    return entities[character];
-  });
 }
 
 
@@ -394,8 +542,13 @@ function initializeSite() {
   setupNavigation();
   setupInstagram();
 
-  document.getElementById("current-year").textContent =
-    new Date().getFullYear();
+  const year = document.getElementById("current-year");
+
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
 }
 
+
+// HTML読み込み後に実行
 initializeSite();
