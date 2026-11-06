@@ -224,13 +224,13 @@ img {
 
 .hero-main-image {
   display: block;
-  width: 100%;
+  width: 120%;
+  max-width: none;
   height: auto;
-  max-width: 100%;
   object-fit: contain;
   object-position: center;
   padding: 0;
-  margin: 0;
+  margin-left: -10%;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -1135,5 +1135,13 @@ button:focus-visible {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .hero-main-image {
+    width: 112%;
+    margin-left: -6%;
   }
 }
