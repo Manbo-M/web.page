@@ -82,6 +82,9 @@ img {
   justify-content: space-between;
   background: var(--cream);
   border-bottom: 1px solid rgba(52, 53, 47, 0.08);
+  background-color: #567dc8;
+  color: #fff;
+ 
 }
 
 .logo,
@@ -111,13 +114,7 @@ img {
 }
 
 .global-nav a:hover {
-  color: #C77B5C;
-}
-
-.global-nav .nav-instagram {
-  padding: 11px 17px;
-  border: 1px solid var(--ink);
-  border-radius: 50px;
+  color: #000000;
 }
 
 .nav-instagram span {
@@ -178,7 +175,7 @@ img {
 }
 
 .hero h1 span {
-  color: #D88D6C;
+  color: #567dc8;
 }
 
 .hero-description {
@@ -452,14 +449,18 @@ img {
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: var(--yellow);
-}
-
-.member-card:nth-child(2n) .member-art {
   background: var(--orange);
 }
 
+.member-card:nth-child(2) .member-art {
+  background-color: #575757;
+}
+
 .member-card:nth-child(3n) .member-art {
+  background: var(--yellow);
+}
+
+.member-card:nth-child(4) .member-art {
   background: var(--green);
 }
 
@@ -687,6 +688,7 @@ img {
   padding: 110px var(--side-padding);
   background: var(--orange);
   text-align: center;
+
 }
 
 .contact-section .section-kicker {
