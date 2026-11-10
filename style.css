@@ -1151,3 +1151,22 @@ button:focus-visible {
     margin-left: -6%;
   }
 }
+
+
+/* スマホ用メニューボタンを白色に */
+.menu-toggle {
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* メニューアイコンの線 */
+.menu-toggle span {
+  background-color: #ffffff !important;
+}
+
+/* 疑似要素で線を作っている場合にも対応 */
+.menu-toggle::before,
+.menu-toggle::after {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}

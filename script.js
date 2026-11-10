@@ -18,13 +18,13 @@ const newsList = [
   {
     date: "2026.11.05",
     category: "INFO",
-    title: "no_deta",
+    title: "no_data",
     demo: true
   },
   {
     date: "2026.11.05",
     category: "INFO",
-    title: "no_deta",
+    title: "no_data",
     demo: true
   }
 ];
