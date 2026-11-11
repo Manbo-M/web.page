@@ -94,7 +94,7 @@ img {
 }
 
 .logo img {
-  width: 150px;
+  width: 110px;
   height: auto;
   object-fit: contain;
 }
@@ -852,7 +852,7 @@ img {
   }
 
   .logo img {
-    width: 30px;
+    width: 110px;
   }
 
   .menu-toggle {
@@ -968,7 +968,7 @@ img {
   }
 
   .logo img {
-    width: 40px;
+    width: 110px;
   }
 
   .hero {
